@@ -1,8 +1,7 @@
 //Q1***Upsert - How to write bulk upsert, where to include ''externalIdFieldName' : 'Name' so included in request body***
-bulk('ampi__Financial__c', 'upsert', { failOnError: true, externalIdFieldName: "someExternalId" }, state => {
+bulk('ampi__Financial__c', 'insert', { failOnError: true }, state => {
   return state.data.entries.map(line => {
     return {
-      // "SomeExternalId": "blah",
       'Name': line.EntryNo_,
       'Posting_Date__c': line.PostingDate,
       'Account_Number__c': line.G_LAccountNo_,
@@ -29,4 +28,3 @@ bulk('ampi__Financial__c', 'upsert', { failOnError: true, externalIdFieldName: "
     }
   })
 });
-"
