@@ -1,0 +1,58 @@
+{
+  "configuration": {
+    "loginUrl": "https://test.salesforce.com",
+    "username":"fca@openfn.org.nav",
+    "password":"PWD",
+    "securityToken": "TOKEN"
+  },
+  "data": {
+  "type": "navFinancials",
+  "note": "AKtest",
+  "entries": [
+    {
+      "StaffCode": "1",
+      "ProjectSeries": "NORDEA123",
+      "ProjectNr": "13006",
+      "PostingDate": "2013-12-17T00:00:00",
+      "G_LAccountNo_": "3430",
+      "EntryNo_": 6269732,
+      "DocumentNo_": "N001580",
+      "Description": "Perttu Lampiranta",
+      "DebitAmount": 0,
+      "CreditAmount": 30,
+      "Amount": -30,
+      "AccountName": "Direct debit donations"
+    },
+    {
+      "StaffCode": "1",
+      "ProjectSeries": "NORDEA",
+      "ProjectNr": "13006",
+      "PostingDate": "2013-12-17T00:00:00",
+      "G_LAccountNo_": "3430",
+      "EntryNo_": 6269734,
+      "DocumentNo_": "N001580",
+      "Description": "Marja Hakomäki",
+      "DebitAmount": 0,
+      "CreditAmount": 15,
+      "Amount": -15,
+      "AccountName": "Direct debit donations"
+    },
+    {
+      "StaffCode": "1",
+      "ProjectSeries": "NORDEA",
+      "ProjectNr": "13006",
+      "PostingDate": "2013-12-17T00:00:00",
+      "G_LAccountNo_": "3430",
+      "EntryNo_": 6269736,
+      "DocumentNo_": "N001580",
+      "Description": "Pirjo Lukkarinen",
+      "DebitAmount": 0,
+      "CreditAmount": 10,
+      "Amount": -10,
+      "AccountName": "Direct debit donations"
+    }
+  ],
+  "__query_params": {}
+}
+
+}
