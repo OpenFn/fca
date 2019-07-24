@@ -1,5 +1,4 @@
-//Q1***Upsert - How to write bulk upsert, where to include ''externalIdFieldName' : 'Name' so included in request body***
-bulk('ampi__Financial__c', 'upsert', { failOnError: true, extIdField: "someExternalId" }, state => {
+bulk('ampi__Financial__c', 'upsert', { failOnError: true, extIdField: 'Name'}, state => {
   return state.data.entries.map(line => {
     return {
       // "SomeExternalId": "blah",
@@ -16,9 +15,9 @@ bulk('ampi__Financial__c', 'upsert', { failOnError: true, extIdField: "someExter
       'Staff_Code__c': line.StaffCode,
       //Q2***HOW TO MAP RELATIONSHIP FIELDS IN BULK FUNCTION?*****
       'ampi__Budget__c': 'a031j00000DxVf8AAF',
-      //IDEAL OUTPUT IN REQUEST BODY: 
+      //IDEAL OUTPUT IN REQUEST BODY:
       //ampi__Budget__r: "{Name : FCA Nav Default Budget}",
-      //IF WE WERE TO WRITE USING HELPER FUNCTIONS: 
+      //IF WE WERE TO WRITE USING HELPER FUNCTIONS:
       //relationship('ampi__Budget__r', 'Name', 'FCA NAV Default Budget'),
 
       'ampi__Reporting_Period__c': 'a0X1j000000MBggEAG',
