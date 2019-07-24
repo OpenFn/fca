@@ -14,9 +14,9 @@ bulk('ampi__Financial__c', 'upsert', { failOnError: true, extIdField: 'Name'}, s
       Project_Series__c: line.ProjectSeries,
       Staff_Code__c: line.StaffCode,
       //Q2***HOW TO MAP RELATIONSHIP FIELDS IN BULK FUNCTION?*****
-      ampi__Budget__c: 'a031j00000DxVf8AAF',
+      // ampi__Budget__c: 'a031j00000DxVf8AAF',
       //IDEAL OUTPUT IN REQUEST BODY:
-      // ampi__Budget__r: "{Name : FCA Nav Default Budget}",
+      ampi__Budget__r: { Name: 'FCA Nav Default Budget' },
       //IF WE WERE TO WRITE USING HELPER FUNCTIONS:
       //relationship('ampi__Budget__r', 'Name', 'FCA NAV Default Budget'),
 
