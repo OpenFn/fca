@@ -20,8 +20,8 @@ bulk('ampi__Financial__c', 'upsert', { failOnError: true, extIdField: 'Name'}, s
       // ampi__Reporting_Period__c: 'a0X1j000000MBggEAG', // hard coded
       'ampi__Reporting_Period__r.Name': 'RP-00020', // ideal
 
-      Project_Number__c: 'a0V1j000000R4D9EAK', // hard coded
-      // 'Project_Number__r.Project_Number_Auto__c': line.ProjectNr, // ideal
+      //Project_Number__c: 'a0V1j000000R4D9EAK', // hard coded
+      'Project_Number__r.Project_Programme_Number_External_ID__c': line.ProjectNr, // ideal
     }
   })
 });
