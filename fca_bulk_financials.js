@@ -5,6 +5,7 @@ bulk(
   state => {
     const raw = state.data.entries
       .filter(item => {
+        // NOTE: only load individual items if they're between 3310 and 3888, incl.
         return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3888;
       })
       .map(item => {
@@ -27,6 +28,7 @@ bulk(
       });
 
     const toAggregate = state.data.entries.filter(item => {
+      // NOTE: aggregate items if they're below 3310 or above 3888.
       return item.G_LAccountNo_ < 3310 || item.G_LAccountNo_ > 3888;
     });
 
