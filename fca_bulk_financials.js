@@ -4,7 +4,7 @@ bulk(
   { failOnError: true, extIdField: 'Name' }, // options
   state => {
     const raw = state.data.entries
-      .filter(function(item) {
+      .filter(item => {
         return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3888;
       })
       .map(item => {
@@ -20,17 +20,9 @@ bulk(
           Credit_Amount__c: item.CreditAmount,
           Project_Series__c: item.ProjectSeries,
           Staff_Code__c: item.StaffCode,
-
-          //Q2***HOW TO MAP RELATIONSHIP FIELDS IN BULK FUNCTION?*****
-          // ampi__Budget__c: 'a031j00000DxVf8AAF', // hard coded
-          'ampi__Budget__r.Name': 'FCA Nav Default Budget', // ideal
-
-          // ampi__Reporting_Period__c: 'a0X1j000000MBggEAG', // hard coded
-          'ampi__Reporting_Period__r.Name': 'RP-00020', // ideal
-
-          //Project_Number__c: 'a0V1j000000R4D9EAK', // hard coded
-          'Project_Number__r.Project_Programme_Number_External_ID__c':
-            item.ProjectNr, // ideal
+          'ampi__Budget__r.Name': 'FCA Nav Default Budget',
+          'ampi__Reporting_Period__r.Name': 'RP-00020',
+          'Project_Number__r.Project_Programme_Number_External_ID__c': item.ProjectNr,
         };
       });
 
