@@ -11,20 +11,20 @@ bulk(
       })
       .map(item => {
         return {
-          Name: item.EntryNo_,
-          Posting_Date__c: item.PostingDate,
-          Account_Number__c: item.G_LAccountNo_,
-          Account_Name__c: item.AccountName,
-          Document_Number__c: item.DocumentNo_,
-          ampi__Description__c: item.Description,
-          ampi__Amount_Actual__c: item.Amount,
-          Debit_Amount__c: item.DebitAmount,
-          Credit_Amount__c: item.CreditAmount,
-          Project_Series__c: item.ProjectSeries,
-          Staff_Code__c: item.StaffCode,
           'ampi__Budget__r.Name': 'FCA Nav Default Budget',
           'ampi__Reporting_Period__r.Name': 'RP-00020',
           'Project_Number__r.Project_Programme_Number_External_ID__c': item.ProjectNr,
+          Account_Name__c: item.AccountName,
+          Account_Number__c: item.G_LAccountNo_,
+          ampi__Amount_Actual__c: item.Amount,
+          ampi__Description__c: item.Description,
+          Credit_Amount__c: item.CreditAmount,
+          Debit_Amount__c: item.DebitAmount,
+          Document_Number__c: item.DocumentNo_,
+          Name: item.EntryNo_,
+          Posting_Date__c: item.PostingDate,
+          Project_Series__c: item.ProjectSeries,
+          Staff_Code__c: item.StaffCode,
         };
       });
 
@@ -38,20 +38,20 @@ bulk(
     typeB.reduce((accumulator, currentItem) => {
       if (!accumulator[currentItem.ProjectNr]) {
         accumulator[currentItem.ProjectNr] = {
-          Name: currentItem.EntryNo_,
-          Posting_Date__c: currentItem.PostingDate,
-          Account_Number__c: currentItem.G_LAccountNo_,
-          Account_Name__c: currentItem.AccountName,
-          Document_Number__c: currentItem.DocumentNo_,
-          ampi__Description__c: currentItem.Description,
-          ampi__Amount_Actual__c: 0,
-          Debit_Amount__c: 0,
-          Credit_Amount__c: 0,
-          // Project_Series__c: '', // Intentionally left blank
-          // Staff_Code__c: '', // Intentionally left blank
           'ampi__Budget__r.Name': 'FCA Nav Default Budget',
           'ampi__Reporting_Period__r.Name': 'RP-00020',
           'Project_Number__r.Project_Programme_Number_External_ID__c': currentItem.ProjectNr,
+          Account_Name__c: currentItem.AccountName,
+          Account_Number__c: currentItem.G_LAccountNo_,
+          ampi__Amount_Actual__c: 0,
+          ampi__Description__c: currentItem.Description,
+          Credit_Amount__c: 0,
+          Debit_Amount__c: 0,
+          Document_Number__c: currentItem.DocumentNo_,
+          Name: currentItem.EntryNo_,
+          Posting_Date__c: currentItem.PostingDate,
+          // Project_Series__c: '', // intentionally left blank
+          // Staff_Code__c: '', // intentionally left blank
         };
         aggregatedTypeB.push(accumulator[currentItem.ProjectNr]);
       }
