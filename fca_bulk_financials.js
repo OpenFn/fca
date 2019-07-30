@@ -3,10 +3,11 @@ bulk(
   'upsert', // operation
   { failOnError: true, extIdField: 'Name' }, // options
   state => {
-    const raw = state.data.entries
+    // NOTE: typeA = "Implementation/Office Support Project Actuals"
+    const typeA = state.data.entries
       .filter(item => {
-        // NOTE: only load individual items if they're between 3310 and 3888, incl.
-        return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3888;
+        // NOTE: load individual items if they're below 3310 or above 3888
+        return item.G_LAccountNo_ < 3310 || item.G_LAccountNo_ > 3888;
       })
       .map(item => {
         return {
@@ -27,13 +28,14 @@ bulk(
         };
       });
 
-    const toAggregate = state.data.entries.filter(item => {
-      // NOTE: aggregate items if they're below 3310 or above 3888.
-      return item.G_LAccountNo_ < 3310 || item.G_LAccountNo_ > 3888;
+    // NOTE: typeB = "Income Projects Actuals"
+    const typeB = state.data.entries.filter(item => {
+      // NOTE: aggregate items if they're between 3310 and 3888, inclusive
+      return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3888;
     });
 
-    var aggregated = [];
-    toAggregate.reduce((accumulator, currentItem) => {
+    var aggregatedTypeB = [];
+    typeB.reduce((accumulator, currentItem) => {
       if (!accumulator[currentItem.ProjectNr]) {
         accumulator[currentItem.ProjectNr] = {
           Name: currentItem.EntryNo_,
@@ -45,13 +47,13 @@ bulk(
           ampi__Amount_Actual__c: 0,
           Debit_Amount__c: 0,
           Credit_Amount__c: 0,
-          Project_Series__c: currentItem.ProjectSeries,
-          Staff_Code__c: currentItem.StaffCode,
+          // Project_Series__c: '', // Intentionally left blank
+          // Staff_Code__c: '', // Intentionally left blank
           'ampi__Budget__r.Name': 'FCA Nav Default Budget',
           'ampi__Reporting_Period__r.Name': 'RP-00020',
           'Project_Number__r.Project_Programme_Number_External_ID__c': currentItem.ProjectNr,
         };
-        aggregated.push(accumulator[currentItem.ProjectNr]);
+        aggregatedTypeB.push(accumulator[currentItem.ProjectNr]);
       }
       accumulator[currentItem.ProjectNr].ampi__Amount_Actual__c += currentItem.Amount;
       accumulator[currentItem.ProjectNr].Debit_Amount__c += currentItem.DebitAmount;
@@ -59,6 +61,6 @@ bulk(
       return accumulator;
     }, {});
 
-    return raw.concat(aggregated);
+    return typeA.concat(aggregatedTypeB);
   }
 );
