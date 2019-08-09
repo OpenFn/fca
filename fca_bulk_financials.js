@@ -34,22 +34,50 @@ bulk(
       return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3888;
     });
 
+    function findRanges(arr) {
+      let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
+      let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
+      let minP = arr[0].PostingDate, maxP = arr[0].PostingDate;
+    
+      for (let i = 1, len=arr.length; i < len; i++) {
+        let e = arr[i].EntryNo_;
+        minE = (e < minE) ? e : minE;
+        maxE = (e > maxE) ? e : maxE;
+
+        let d = arr[i].DocumentNo_;
+        minD = (d < minD) ? d : minD;
+        maxD = (d > maxD) ? d : maxD;
+
+        let p = arr[i].PostingDate;
+        minP = (p < minP) ? p : minP;
+        maxP = (p > maxP) ? p : maxP;
+      }
+    
+      return {
+        EntryNo_: `${minE} - ${maxE}`,
+        DocumentNo_: `${minD} - ${maxD}`,
+        PostingDate: `${minP} - ${maxP}`,
+      };
+    }
+    const ranges = findRanges(typeB);
+
     var aggregatedTypeB = [];
+
     typeB.reduce((accumulator, currentItem) => {
       if (!accumulator[currentItem.ProjectNr]) {
         accumulator[currentItem.ProjectNr] = {
           'ampi__Budget__r.Name': 'FCA Nav Default Budget',
           'ampi__Reporting_Period__r.Name': 'RP-00020',
           'Project_Number__r.Project_Programme_Number_External_ID__c': currentItem.ProjectNr,
-          Account_Name__c: currentItem.AccountName,
-          Account_Number__c: currentItem.G_LAccountNo_,
+          Account_Name__c: "Donations",
+          Account_Number__c: "3310 - 3888",
           ampi__Amount_Actual__c: 0,
-          ampi__Description__c: currentItem.Description,
+          ampi__Description__c: "Donations",
           Credit_Amount__c: 0,
           Debit_Amount__c: 0,
-          Document_Number__c: currentItem.DocumentNo_,
-          Name: currentItem.EntryNo_,
-          Posting_Date__c: currentItem.PostingDate,
+          Document_Number__c: ranges.DocumentNo_,
+          Name: ranges.EntryNo_,
+          Posting_Date__c: ranges.PostingDate,
           // Project_Series__c: '', // intentionally left blank
           // Staff_Code__c: '', // intentionally left blank
         };
