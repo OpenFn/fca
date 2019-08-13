@@ -1,7 +1,8 @@
 {
-  "type": "navFinancials",
-  "note": "test1c1",
-  "entries": [
+ "data": {
+    "type": "navFinancials",
+    "note": "test1c1",
+    "entries": [
     {
       "EntryNo_": 6335335,
       "G_LAccountNo_": "5635",
@@ -127,6 +128,6 @@
       "ProjectSeries": "MUISTIO 12",
       "ProjectNr": "91300",
       "StaffCode": ""
-    }
-  ]
+    }]
+ }
 }
