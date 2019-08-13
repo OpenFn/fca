@@ -1,7 +1,8 @@
 {
-  "type": "navFinancials",
-  "note": "test1d1",
-  "entries": [  
+ "data": {
+    "type": "navFinancials",
+    "note": "test1d1",
+    "entries": [  
     {
       "EntryNo_": 6269732,
       "G_LAccountNo_": "3430",
@@ -141,6 +142,6 @@
       "ProjectSeries": "NORDEA",
       "ProjectNr": "61305",
       "StaffCode": ""
-    }
-  ]
+    }]
+  }
 }
