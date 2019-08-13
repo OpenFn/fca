@@ -1,4 +1,8 @@
 {
+  "type": "navFinancials",
+  "note": "test1c1",
+  "entries": [
+    {
       "EntryNo_": 6335335,
       "G_LAccountNo_": "5635",
       "AccountName": "Mobile phone costs",
@@ -124,3 +128,5 @@
       "ProjectNr": "91300",
       "StaffCode": ""
     }
+  ]
+}
