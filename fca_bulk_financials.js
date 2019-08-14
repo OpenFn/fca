@@ -3,6 +3,10 @@ bulk(
   'upsert', // operation
   { failOnError: true, extIdField: 'Name' }, // options
   state => {
+    function transformDate(dt) {
+      return dt.split('T')[0]
+    }
+
     // NOTE: typeA = "Implementation/Office Support Project Actuals"
     const typeA = state.data.entries
       .filter(item => {
@@ -22,7 +26,7 @@ bulk(
           Debit_Amount__c: item.DebitAmount,
           Document_Number__c: item.DocumentNo_,
           Name: item.EntryNo_,
-          Posting_Date__c: item.PostingDate,
+          Posting_Date__c: transformDate(item.PostingDate),
           Project_Series__c: item.ProjectSeries,
           Staff_Code__c: item.StaffCode,
         };
@@ -38,10 +42,10 @@ bulk(
       if (arr.length === 0) {
         return null;
       }
-      
+
       let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
       let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
-      let minP = arr[0].PostingDate, maxP = arr[0].PostingDate;
+      let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
     
       for (let i = 1, len=arr.length; i < len; i++) {
         let e = arr[i].EntryNo_;
@@ -52,7 +56,7 @@ bulk(
         minD = (d < minD) ? d : minD;
         maxD = (d > maxD) ? d : maxD;
 
-        let p = arr[i].PostingDate;
+        let p = transformDate(arr[i].PostingDate);
         minP = (p < minP) ? p : minP;
         maxP = (p > maxP) ? p : maxP;
       }
