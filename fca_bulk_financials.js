@@ -35,6 +35,10 @@ bulk(
     });
 
     function findRanges(arr) {
+      if (arr.length === 0) {
+        return null;
+      }
+      
       let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
       let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
       let minP = arr[0].PostingDate, maxP = arr[0].PostingDate;
