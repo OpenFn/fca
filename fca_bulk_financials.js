@@ -15,9 +15,9 @@ bulk(
       })
       .map(item => {
         return {
-          'ampi__Budget__r.Budget_Unique_Identifier__c': currentItem.ProjectNr,
-          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': currentItem.ProjectNr,
-          'Project_Number__r.Project_Number_External_ID__c': currentItem.ProjectNr,
+          'ampi__Budget__r.Budget_Unique_Identifier__c': item.ProjectNr,
+          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': item.ProjectNr,
+          'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr,
           Account_Name__c: item.AccountName,
           Account_Number__c: item.G_LAccountNo_,
           ampi__Amount_Actual__c: item.Amount,
