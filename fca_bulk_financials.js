@@ -15,9 +15,9 @@ bulk(
       })
       .map(item => {
         return {
-          'ampi__Budget__r.Name': 'FCA Nav Default Budget',
-          'ampi__Reporting_Period__r.Name': 'RP-00020',
-          'Project_Number__r.Project_Programme_Number_External_ID__c': item.ProjectNr,
+          'ampi__Budget__r.Budget_Unique_Identifier__c': currentItem.ProjectNr,
+          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': currentItem.ProjectNr,
+          'Project_Number__r.Project_Number_External_ID__c': currentItem.ProjectNr,
           Account_Name__c: item.AccountName,
           Account_Number__c: item.G_LAccountNo_,
           ampi__Amount_Actual__c: item.Amount,
@@ -26,7 +26,7 @@ bulk(
           Debit_Amount__c: item.DebitAmount,
           Document_Number__c: item.DocumentNo_,
           Name: item.EntryNo_,
-          Posting_Date__c: transformDate(item.PostingDate),
+          Date_For_Currency_Conversion__c: transformDate(item.PostingDate),
           Project_Series__c: item.ProjectSeries,
           Staff_Code__c: item.StaffCode,
         };
@@ -46,7 +46,7 @@ bulk(
       let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
       let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
       let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
-    
+
       for (let i = 1, len=arr.length; i < len; i++) {
         let e = arr[i].EntryNo_;
         minE = (e < minE) ? e : minE;
@@ -60,7 +60,7 @@ bulk(
         minP = (p < minP) ? p : minP;
         maxP = (p > maxP) ? p : maxP;
       }
-    
+
       return {
         EntryNo_: `${minE} - ${maxE}`,
         DocumentNo_: `${minD} - ${maxD}`,
@@ -74,9 +74,9 @@ bulk(
     typeB.reduce((accumulator, currentItem) => {
       if (!accumulator[currentItem.ProjectNr]) {
         accumulator[currentItem.ProjectNr] = {
-          'ampi__Budget__r.Name': 'FCA Nav Default Budget',
-          'ampi__Reporting_Period__r.Name': 'RP-00020',
-          'Project_Number__r.Project_Programme_Number_External_ID__c': currentItem.ProjectNr,
+          'ampi__Budget__r.Budget_Unique_Identifier__c': currentItem.ProjectNr,
+          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': currentItem.ProjectNr,
+          'Project_Number__r.Project_Number_External_ID__c': currentItem.ProjectNr,
           Account_Name__c: "Donations",
           Account_Number__c: "3310 - 3888",
           ampi__Amount_Actual__c: 0,
@@ -85,7 +85,7 @@ bulk(
           Debit_Amount__c: 0,
           Document_Number__c: ranges.DocumentNo_,
           Name: ranges.EntryNo_,
-          Posting_Date__c: ranges.PostingDate,
+          Date_For_Currency_Conversion__c: ranges.PostingDate,
           // Project_Series__c: '', // intentionally left blank
           // Staff_Code__c: '', // intentionally left blank
         };
@@ -93,7 +93,7 @@ bulk(
       }
       accumulator[currentItem.ProjectNr].ampi__Amount_Actual__c += currentItem.Amount;
       accumulator[currentItem.ProjectNr].Debit_Amount__c += currentItem.DebitAmount;
-      accumulator[currentItem.ProjectNr].Credit_Amount__c += currentItem.CreditAmount;      
+      accumulator[currentItem.ProjectNr].Credit_Amount__c += currentItem.CreditAmount;
       return accumulator;
     }, {});
 
