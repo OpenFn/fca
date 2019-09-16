@@ -45,7 +45,8 @@ bulk(
 
       let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
       let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
-      let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
+      let maxP = transformDate(arr[0].PostingDate);
+      //let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
 
       for (let i = 1, len=arr.length; i < len; i++) {
         let e = arr[i].EntryNo_;
@@ -57,14 +58,14 @@ bulk(
         maxD = (d > maxD) ? d : maxD;
 
         let p = transformDate(arr[i].PostingDate);
-        minP = (p < minP) ? p : minP;
-        maxP = (p > maxP) ? p : maxP;
+        //minP = (p < minP) ? p : minP;
+        maxP = (p > maxP) ? p : maxP; //Only return max Date
       }
 
       return {
         EntryNo_: `${minE} - ${maxE}`,
         DocumentNo_: `${minD} - ${maxD}`,
-        PostingDate: `${minP} - ${maxP}`,
+        PostingDate: `${maxP}`,
       };
     }
     const ranges = findRanges(typeB);
