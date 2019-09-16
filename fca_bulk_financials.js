@@ -28,7 +28,7 @@ bulk(
           Name: item.EntryNo_,
           Date_For_Currency_Conversion__c: transformDate(item.PostingDate),
           Project_Series__c: item.ProjectSeries,
-          Staff_Code__c: item.StaffCode,
+          Staff_Code__c: item.StaffCode
         };
       });
 
@@ -65,7 +65,7 @@ bulk(
       return {
         EntryNo_: `${minE} - ${maxE}`,
         DocumentNo_: `${minD} - ${maxD}`,
-        PostingDate: `${maxP}`,
+        PostingDate: `${maxP}`
       };
     }
     const ranges = findRanges(typeB);
@@ -86,7 +86,7 @@ bulk(
           Debit_Amount__c: 0,
           Document_Number__c: ranges.DocumentNo_,
           Name: ranges.EntryNo_,
-          Date_For_Currency_Conversion__c: ranges.PostingDate,
+          Date_For_Currency_Conversion__c: ranges.PostingDate
           // Project_Series__c: '', // intentionally left blank
           // Staff_Code__c: '', // intentionally left blank
         };
