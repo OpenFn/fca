@@ -43,15 +43,16 @@ bulk(
         return null;
       }
 
-      let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
+      //let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
+      let maxE = arr[0].EntryNo_;
       let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
       let maxP = transformDate(arr[0].PostingDate);
       //let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
 
       for (let i = 1, len=arr.length; i < len; i++) {
         let e = arr[i].EntryNo_;
-        minE = (e < minE) ? e : minE;
-        maxE = (e > maxE) ? e : maxE;
+        //minE = (e < minE) ? e : minE;
+        maxE = (e > maxE) ? e : maxE; //only return max EntryNo
 
         let d = arr[i].DocumentNo_;
         minD = (d < minD) ? d : minD;
@@ -63,7 +64,7 @@ bulk(
       }
 
       return {
-        EntryNo_: `${minE} - ${maxE}`,
+        EntryNo_: `${maxE}`,
         DocumentNo_: `${minD} - ${maxD}`,
         PostingDate: `${maxP}`
       };
