@@ -43,8 +43,8 @@ bulk(
         return null;
       }
 
-      //let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
-      let maxE = arr[0].EntryNo_;
+      const projectNo = arr[0].ProjectNr;
+      let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
       let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
       let maxP = transformDate(arr[0].PostingDate);
       //let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
@@ -64,7 +64,7 @@ bulk(
       }
 
       return {
-        EntryNo_: `${maxE}`,
+        uniqueName: `${maxE}-${minE}-${projectNo}`,
         DocumentNo_: `${minD} - ${maxD}`,
         PostingDate: `${maxP}`
       };
@@ -86,7 +86,7 @@ bulk(
           Credit_Amount__c: 0,
           Debit_Amount__c: 0,
           Document_Number__c: ranges.DocumentNo_,
-          Name: ranges.EntryNo_,
+          Name: ranges.uniqueName,
           Date_For_Currency_Conversion__c: ranges.PostingDate
           // Project_Series__c: '', // intentionally left blank
           // Staff_Code__c: '', // intentionally left blank
