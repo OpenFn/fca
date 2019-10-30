@@ -4,7 +4,7 @@ bulk(
   { failOnError: true, extIdField: 'Name' }, // options
   state => {
     function transformDate(dt) {
-      return dt.split('T')[0]
+      return dt.split('T')[0];
     }
 
     // NOTE: typeA = "Implementation/Office Support Project Actuals"
@@ -16,7 +16,8 @@ bulk(
       .map(item => {
         return {
           'ampi__Budget__r.Budget_Unique_Identifier__c': item.ProjectNr,
-          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': item.ProjectNr,
+          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c':
+            item.ProjectNr,
           'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr,
           Account_Name__c: item.AccountName,
           Account_Number__c: item.G_LAccountNo_,
@@ -28,7 +29,7 @@ bulk(
           Name: item.EntryNo_,
           Date_For_Currency_Conversion__c: transformDate(item.PostingDate),
           Project_Series__c: item.ProjectSeries,
-          Staff_Code__c: item.StaffCode
+          Staff_Code__c: item.StaffCode,
         };
       });
 
@@ -43,30 +44,31 @@ bulk(
         return null;
       }
 
-      const projectNo = arr[0].ProjectNr;
-      let minE = arr[0].EntryNo_, maxE = arr[0].EntryNo_;
-      let minD = arr[0].DocumentNo_, maxD = arr[0].DocumentNo_;
+      let minE = arr[0].EntryNo_,
+        maxE = arr[0].EntryNo_;
+      let minD = arr[0].DocumentNo_,
+        maxD = arr[0].DocumentNo_;
       let maxP = transformDate(arr[0].PostingDate);
       //let minP = transformDate(arr[0].PostingDate), maxP = transformDate(arr[0].PostingDate);
 
-      for (let i = 1, len=arr.length; i < len; i++) {
+      for (let i = 1, len = arr.length; i < len; i++) {
         let e = arr[i].EntryNo_;
         //minE = (e < minE) ? e : minE;
-        maxE = (e > maxE) ? e : maxE; //only return max EntryNo
+        maxE = e > maxE ? e : maxE; //only return max EntryNo
 
         let d = arr[i].DocumentNo_;
-        minD = (d < minD) ? d : minD;
-        maxD = (d > maxD) ? d : maxD;
+        minD = d < minD ? d : minD;
+        maxD = d > maxD ? d : maxD;
 
         let p = transformDate(arr[i].PostingDate);
         //minP = (p < minP) ? p : minP;
-        maxP = (p > maxP) ? p : maxP; //Only return max Date
+        maxP = p > maxP ? p : maxP; //Only return max Date
       }
 
       return {
-        uniqueName: `${maxE}-${minE}-${projectNo}`,
+        entryRange: `${maxE}-${minE}`,
         DocumentNo_: `${minD} - ${maxD}`,
-        PostingDate: `${maxP}`
+        PostingDate: `${maxP}`,
       };
     }
     const ranges = findRanges(typeB);
@@ -74,28 +76,29 @@ bulk(
     var aggregatedTypeB = [];
 
     typeB.reduce((accumulator, currentItem) => {
-      if (!accumulator[currentItem.ProjectNr]) {
-        accumulator[currentItem.ProjectNr] = {
-          'ampi__Budget__r.Budget_Unique_Identifier__c': currentItem.ProjectNr,
-          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': currentItem.ProjectNr,
-          'Project_Number__r.Project_Number_External_ID__c': currentItem.ProjectNr,
-          Account_Name__c: "Donations",
-          Account_Number__c: "3310 - 3888",
+      const { ProjectNr, Amount, DebitAmount, CreditAmount } = currentItem;
+      if (!accumulator[ProjectNr]) {
+        accumulator[ProjectNr] = {
+          'ampi__Budget__r.Budget_Unique_Identifier__c': ProjectNr,
+          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': ProjectNr,
+          'Project_Number__r.Project_Number_External_ID__c': ProjectNr,
+          Account_Name__c: 'Donations',
+          Account_Number__c: '3310 - 3888',
           ampi__Amount_Actual__c: 0,
-          ampi__Description__c: "Donations",
+          ampi__Description__c: 'Donations',
           Credit_Amount__c: 0,
           Debit_Amount__c: 0,
           Document_Number__c: ranges.DocumentNo_,
-          Name: ranges.uniqueName,
-          Date_For_Currency_Conversion__c: ranges.PostingDate
+          Name: `${ranges.entryRange}-${ProjectNr}`,
+          Date_For_Currency_Conversion__c: ranges.PostingDate,
           // Project_Series__c: '', // intentionally left blank
           // Staff_Code__c: '', // intentionally left blank
         };
-        aggregatedTypeB.push(accumulator[currentItem.ProjectNr]);
+        aggregatedTypeB.push(accumulator[ProjectNr]);
       }
-      accumulator[currentItem.ProjectNr].ampi__Amount_Actual__c += currentItem.Amount;
-      accumulator[currentItem.ProjectNr].Debit_Amount__c += currentItem.DebitAmount;
-      accumulator[currentItem.ProjectNr].Credit_Amount__c += currentItem.CreditAmount;
+      accumulator[ProjectNr].ampi__Amount_Actual__c += Amount;
+      accumulator[ProjectNr].Debit_Amount__c += DebitAmount;
+      accumulator[ProjectNr].Credit_Amount__c += CreditAmount;
       return accumulator;
     }, {});
 
