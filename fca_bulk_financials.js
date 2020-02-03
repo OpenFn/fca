@@ -15,7 +15,7 @@ bulk(
       })
       .map(item => {
         return {
-          'ampi__Budget__r.Budget_Unique_Identifier__c': item.ProjectNr,
+          'ampi__Budget__r.Budget_Unique_Identifier__c': item.ProjectNr.substring(0,4),
           'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c':
             item.ProjectNr,
           'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr,
@@ -81,7 +81,7 @@ bulk(
       const { ProjectNr, Amount, DebitAmount, CreditAmount } = currentItem;
       if (!accumulator[ProjectNr]) {
         accumulator[ProjectNr] = {
-          'ampi__Budget__r.Budget_Unique_Identifier__c': ProjectNr,
+          'ampi__Budget__r.Budget_Unique_Identifier__c': ProjectNr.substring(0,4),
           'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': ProjectNr,
           'Project_Number__r.Project_Number_External_ID__c': ProjectNr,
           Account_Name__c: 'Donations',
