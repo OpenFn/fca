@@ -19,8 +19,8 @@ bulk(
           'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c':
             item.ProjectNr,
           'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr,
-          Income_Account_Number__c: G_LAccountNo_ <= 3999 ? item.G_LAccountNo_ + item.AccountName : '',
-          Expense_Account_Number__c: G_LAccountNo_ >= 4000 ? item.G_LAccountNo_ + item.AccountName : '',
+          Income_Account_Number__c: item.G_LAccountNo_ <= 3999 ? item.G_LAccountNo_ + item.AccountName : '',
+          Expense_Account_Number__c: item.G_LAccountNo_ >= 4000 ? item.G_LAccountNo_ + item.AccountName : '',
           //DEP___Account_Name__c: item.AccountName, //To replace with Jan 30 change request
           //DEP___Account_Number__c: item.G_LAccountNo_, //To replace with Jan 30 change request
           ampi__Amount_Actual__c: item.Amount,
