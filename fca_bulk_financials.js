@@ -17,12 +17,10 @@ bulk(
         return {
           'ampi__Budget__r.Budget_Unique_Identifier__c': item.ProjectNr.substring(0,4),
           'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c':
-            item.ProjectNr,
-          'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr,
+            item.ProjectNr.substring(0,4),
+          'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr.substring(0,4),
           Income_Account_Number__c: item.G_LAccountNo_ <= 3999 ? item.G_LAccountNo_ + ' ' + item.AccountName : '',
           Expense_Account_Number__c: item.G_LAccountNo_ >= 4000 ? item.G_LAccountNo_ + ' ' + item.AccountName : '',
-          //DEP___Account_Name__c: item.AccountName, //To replace with Jan 30 change request
-          //DEP___Account_Number__c: item.G_LAccountNo_, //To replace with Jan 30 change request
           ampi__Amount_Actual__c: item.Amount,
           ampi__Description__c: item.Description,
           Credit_Amount__c: item.CreditAmount,
@@ -82,8 +80,8 @@ bulk(
       if (!accumulator[ProjectNr]) {
         accumulator[ProjectNr] = {
           'ampi__Budget__r.Budget_Unique_Identifier__c': ProjectNr.substring(0,4),
-          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': ProjectNr,
-          'Project_Number__r.Project_Number_External_ID__c': ProjectNr,
+          'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': ProjectNr.substring(0,4),
+          'Project_Number__r.Project_Number_External_ID__c': ProjectNr.substring(0,4),
           Account_Name__c: 'Donations',
           Account_Number__c: '3310 - 3888',
           ampi__Amount_Actual__c: 0,
