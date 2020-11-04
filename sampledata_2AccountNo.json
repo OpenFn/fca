@@ -1,0 +1,33 @@
+{
+  "__query_params": {},
+  "date": "2020-11-04T01:13:08.0062395Z",
+  "entries": [
+  {
+      "AccountName": "Informal collections fr. paris",
+      "Amount": 7000,
+      "CreditAmount": 0,
+      "DebitAmount": 7000,
+      "Description": "Pielisensuun srk",
+      "DocumentNo_": "KOR4039",
+      "EntryNo_": 14852145,
+      "G_LAccountNo_": "3325",
+      "PostingDate": "2020-06-16T00:00:00",
+      "ProjectNr": "61313",
+      "ProjectSeries": "KORJAUS 20",
+      "StaffCode": ""
+    },
+    {
+      "AccountName": "Parish budget contributions",
+      "Amount": -7000,
+      "CreditAmount": 7000,
+      "DebitAmount": 0,
+      "Description": "Pielisensuun srk",
+      "DocumentNo_": "KOR4039",
+      "EntryNo_": 14852147,
+      "G_LAccountNo_": "3310",
+      "PostingDate": "2020-06-16T00:00:00",
+      "ProjectNr": "61313T",
+      "ProjectSeries": "KORJAUS 20",
+      "StaffCode": ""
+    }
+ ])
