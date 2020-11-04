@@ -3,11 +3,11 @@
   "date": "2020-11-04T01:13:08.0062395Z",
   "entries": [
   {
-      "AccountName": "Informal collections fr. paris",
+      "AccountName": "Informal collections fr. sample",
       "Amount": 7000,
       "CreditAmount": 0,
       "DebitAmount": 7000,
-      "Description": "Pielisensuun srk",
+      "Description": "sample srk",
       "DocumentNo_": "KOR4039",
       "EntryNo_": 14852145,
       "G_LAccountNo_": "3325",
@@ -17,11 +17,11 @@
       "StaffCode": ""
     },
     {
-      "AccountName": "Parish budget contributions",
+      "AccountName": "Sample budget contributions",
       "Amount": -7000,
       "CreditAmount": 7000,
       "DebitAmount": 0,
-      "Description": "Pielisensuun srk",
+      "Description": "sample srk",
       "DocumentNo_": "KOR4039",
       "EntryNo_": 14852147,
       "G_LAccountNo_": "3310",
