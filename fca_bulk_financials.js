@@ -19,6 +19,7 @@ bulk(
           'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c':
             item.ProjectNr.substring(0,5),
           'Project_Number__r.Project_Number_External_ID__c': item.ProjectNr.substring(0,5),
+          NAV_project__c: item.ProjectNr,
           Income_Account_Number__c: item.G_LAccountNo_ <= 3999 ? item.G_LAccountNo_ + ' ' + item.AccountName : '',
           Expense_Account_Number__c: item.G_LAccountNo_ >= 4000 ? item.G_LAccountNo_ + ' ' + item.AccountName : '',
           ampi__Amount_Actual__c: item.Amount,
@@ -82,8 +83,9 @@ bulk(
           'ampi__Budget__r.Budget_Unique_Identifier__c': ProjectNr.substring(0,5),
           'ampi__Reporting_Period__r.Reporting_Period_Unique_Identifier__c': ProjectNr.substring(0,5),
           'Project_Number__r.Project_Number_External_ID__c': ProjectNr.substring(0,5),
+          NAV_project__c: ProjectNr,
           Account_Name__c: 'Donations',
-          Account_Number__c: '3310 - 3888',
+          Account_Number__c: '3310 - 3599',
           ampi__Amount_Actual__c: 0,
           ampi__Description__c: 'Donations',
           Credit_Amount__c: 0,
