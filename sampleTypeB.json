@@ -1,0 +1,47 @@
+{
+  "__query_params": {},
+  "date": "2020-11-06T01:13:08.1606731Z",
+  "entries": [
+    {
+      "AccountName": "Private donations",
+      "Amount": -33,
+      "CreditAmount": 33,
+      "DebitAmount": 0,
+      "Description": "Aleksa Krolls",
+      "DocumentNo_": "OP003062",
+      "EntryNo_": 14854348,
+      "G_LAccountNo_": "3420",
+      "PostingDate": "2020-11-03T00:00:00",
+      "ProjectNr": "61304",
+      "ProjectSeries": "OP",
+      "StaffCode": ""
+    },
+    {
+      "AccountName": "Private donations",
+      "Amount": -15,
+      "CreditAmount": 15,
+      "DebitAmount": 0,
+      "Description": "Jed Goldstein",
+      "DocumentNo_": "OP003062",
+      "EntryNo_": 14854350,
+      "G_LAccountNo_": "3421",
+      "PostingDate": "2020-11-03T00:00:00",
+      "ProjectNr": "61304",
+      "ProjectSeries": "OP",
+      "StaffCode": ""
+    },
+    {
+      "AccountName": "Private donations",
+      "Amount": -33,
+      "CreditAmount": 33,
+      "DebitAmount": 0,
+      "Description": "Rita Zagoni",
+      "DocumentNo_": "OP003062",
+      "EntryNo_": 14854352,
+      "G_LAccountNo_": "3420",
+      "PostingDate": "2020-11-03T00:00:00",
+      "ProjectNr": "61304T",
+      "ProjectSeries": "OP",
+      "StaffCode": ""
+    }
+]}
