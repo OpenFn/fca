@@ -10,8 +10,8 @@ bulk(
     // NOTE: typeA = "Implementation/Office Support Project Actuals"
     const typeA = state.data.entries
       .filter(item => {
-        // NOTE: load individual items if they're below 3310 or above 3888
-        return item.G_LAccountNo_ < 3310 || item.G_LAccountNo_ > 3888;
+        // NOTE: load individual items if they're below 3310 or above 3599 (CHANGED FROM 3888 ON NOV-6)
+        return item.G_LAccountNo_ < 3310 || item.G_LAccountNo_ > 3599; 
       })
       .map(item => {
         return {
@@ -35,8 +35,8 @@ bulk(
 
     // NOTE: typeB = "Income Projects Actuals"
     const typeB = state.data.entries.filter(item => {
-      // NOTE: aggregate items if they're between 3310 and 3888, inclusive
-      return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3888;
+      // NOTE: aggregate items if they're between 3310 and 3599, inclusive (CHANGED FROM 3888 ON NOV-6)
+      return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3599;
     });
 
     function findRanges(arr) {
