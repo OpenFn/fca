@@ -39,6 +39,7 @@ bulk(
       // NOTE: aggregate items if they're between 3310 and 3599, inclusive (CHANGED FROM 3888 ON NOV-6)
       return item.G_LAccountNo_ >= 3310 && item.G_LAccountNo_ <= 3599;
     });
+    const maxItem = typeB.reduce((prev, current) => (prev.G_LAccountNo_ > current.G_LAccountNo_) ? prev : current)
 
     function findRanges(arr) {
       if (arr.length === 0) {
@@ -85,7 +86,7 @@ bulk(
           'Project_Number__r.Project_Number_External_ID__c': ProjectNr.substring(0,5),
           NAV_project__c: ProjectNr,
           Account_Name__c: 'Donations',
-          Account_Number__c: '3310 - 3599',
+          Account_Number__c: `${maxItem.G_LAccountNo_} ${maxItem.AccountName}`,
           ampi__Amount_Actual__c: 0,
           ampi__Description__c: 'Donations',
           Credit_Amount__c: 0,
